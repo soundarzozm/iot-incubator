@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Display Webcam Stream</title>
+<h1 style="color:LightGrey;" h1 style="text-align: center";>  Display Webcam Stream </h>
+<h4 style="color:LightGrey;" h1 style="text-align: center";> This website allows for live monitoring of the baby. Click ON to turn on camera  </h>
+<style>
+#container {
+	margin: 0px auto;
+	width: 500px;
+	height: 375px;
+	border: 10px #333 solid;
+}
+#videoElement {
+	width: 500px;
+	height: 375px;
+	background-color: #666;
+}
+</style>
+ <script type="text/javascript" src="https://cloud.boltiot.com/static/js/boltCommands.js"></script>
+        <script>
+        setKey('{{ApiKey}}','{{Name}}');
+        </script>
+</head>
+ 
+<body style="background-color:darkblue;">
+<div id="container">
+	<video autoplay="true" id="videoElement">
+	
+	</video>
+</div> 
+    
+        <center>
+        <button onclick="analogRead(A0);">VITALS</button>
+        </center>
+   
+<script>
+var video = document.querySelector("#videoElement");
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}
+function stop(e) {
+  var stream = video.srcObject;
+  var tracks = stream.getTracks();
+
+  for (var i = 0; i < tracks.length; i++) {
+    var track = tracks[i];
+    track.stop();
+  }
+
+  video.srcObject = null;
+<p>
+This website allows for live monitoring of the baby. Click ON to turn on camera
+</p>
+}
+</script>
+<br><br>
+<p align=center>
+  <img src="nurse.jpeg" alt="Nurse" width="240" height="150">
+  <br>
+  Nurse: Jennifer Vincent
+  <br>
+  Contact Number: 9876543210
+</p>
+</body>
+</html>
